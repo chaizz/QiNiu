@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #main {
+            position: absolute;
+            width:400px;
+            height:200px;
+            left:50%;
+            top:50%;
+            margin-left:-200px;
+            margin-top:-100px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+
+<div id="main">
+    <form method="post" enctype="multipart/form-data" action="http://127.0.0.1:5000/qiniu">
+        <input type="file" id="img" name="imgup">
+        <button type="submit" id="btn">上传图片</button>
+    </form>
+</div>
+
+
+
+
+
+</body>
+</html>
