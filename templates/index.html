@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chaizz图床</title>
     <!-- 引入样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
 
     <style>
@@ -34,8 +34,9 @@
                 class="upload-demo"
                 drag
                 show-file-list
-                 :http-request="uploadFile"
-                action="http://127.0.0.1:5000"
+                :http-request="uploadFile"
+                :on-success = "open2"
+                action="https://img.chaizz.com"
                 multiple>
               <i class="el-icon-upload"></i>
               <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -50,17 +51,27 @@
 <script>
     var app = new Vue({
         el:"#app",
-
+        data(){
+            return {
+                fileList:[{"name":""}]
+            }
+        },
          methods: {
             async uploadFile(params) {
               let form = new FormData();
               form.append("file", params.file);
-
-              const res = await axios.post("http://127.0.0.1:5000", form);
-              console.log(res);
-              this.imageUrl = res.data;
+              const res = await axios.post("http://127.0.0.1:5000/", form);
+              {#const res = await axios.post("https://img.chaizz.com/", form);#}
+              this.imgUrl = res['data']['ImgUrl']
             },
+              open2() {
+                this.$message({
+                  message: this.imgUrl,
+                  type: 'success'
+                });
+              },
           },
+
     })
 </script>
 </body>
